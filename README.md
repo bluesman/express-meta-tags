@@ -36,20 +36,30 @@ Install with:
 
 ##Options
 
-`prefix`: a string to prepend to the redis key.  The redis key looks like this: `<prefix>:<req.url>`. for example,
+###prefix
+
+a string to prepend to the redis key.  The redis key looks like this: `<prefix>:<req.url>`. for example,
 
 	meta-tags:/about-us
 
 would act as the key for the meta data for the /about-us url
 
-`namespace`: a string which will be the key in the req obj.  Essentially, req[opts.namespace] = metaTagData.
+###namespace
 
-`accept`: a regular expression. If opts.accept.test(req.url) is true, meta tag data will be fetched using the key: `<prefix>:<req.url>`
+a string which will be the key in the req obj.  Essentially, req[opts.namespace] = metaTagData.
 
-`ignore`: a regular expression. If opts.ignore.test(req.url) is true, meta tag data will `not` be fetched. If opts.accept is defined, opts.ignore will only be in effect if opts.accept.test(req.url) is false.
+###accept
+
+a regular expression. If opts.accept.test(req.url) is true, meta tag data will be fetched using the key: `<prefix>:<req.url>`
+
+###ignore
+
+a regular expression. If opts.ignore.test(req.url) is true, meta tag data will `not` be fetched. If opts.accept is defined, opts.ignore will only be in effect if opts.accept.test(req.url) is false.
 
 
-`redis`: a js object containing the connection config for redis (uses: [node-redis](https://github.com/mranney/node_redis))
+###redis
+
+a js object containing the connection config for redis (uses: [node-redis](https://github.com/mranney/node_redis))
 
 ```js
 	{
