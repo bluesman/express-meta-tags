@@ -1,5 +1,6 @@
 {
-  "name": "node-meta",
+  "name": "express-meta-tags",
+  "author": "https://github.com/bluesman",
   "description": "ExpressJS Middleware uses redis to store/manage meta data for site pages",
   "version": "0.0.1",
   "dependencies": {
@@ -9,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bluesman/node-meta.git"
+    "url": "https://github.com/bluesman/express-meta-tags.git"
   },
   "engine": {
     "node": ">=0.8.6"
