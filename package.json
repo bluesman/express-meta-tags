@@ -2,7 +2,7 @@
   "name": "express-meta-tags",
   "author": "https://github.com/bluesman",
   "description": "ExpressJS Middleware uses redis to store/manage meta data for site pages",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "redis":"0.7.x",
     "csv":"0.3.x",
