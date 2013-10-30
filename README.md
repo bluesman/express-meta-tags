@@ -11,8 +11,31 @@ Install with:
 * Bulk import meta tag data into redis from csv or url (think google doc spreadsheet)
 * Meta tag data keyed by req.url and loaded on each request
 * Use RegEx to control which urls should have meta tag data fetched
+* Support for rel="canonical"
 
 ##Usage
+
+## Put together a CSV with your meta tag data
+
+	URL,CANONICAL,TITLE,DESCRIPTION
+	/about-us,,"All About Us","A bunch of info about who we are"
+	/,,"The Home Page","Description of the home page"
+	/index,/,"",""
+
+## Load your meta tag data into redis
+
+	node bin/bulk-load.js -h redis.domain.com -p 6379 --prefix meta-tags meta-tags.csv
+	
+OR
+	
+	node bin/bulk-load.js -h redis.domain.com -p 6379 --prefix meta-tags "https://docs.google.com/spreadsheet/pub?key=0AlQen94blI0ddGZXVHBsdkswTlZLaXFMNFhUQlhJZHc&output=csv"
+	
+### Notes:
+
+* Make sure you put any urls in quotes
+* Your CSV must have a header row.  The header values will be uppercased before they are stored in redis.
+
+## Add middleware in your app.js
 
 ```js
 
@@ -33,6 +56,18 @@ Install with:
 	});
 
 ```
+
+##Use your meta tag data in your template
+
+	- var title       = (typeof meta.TITLE       !== "undefined") ? meta.TITLE       : 'A default title';
+	- var description = (typeof meta.DESCRIPTION !== "undefined") ? meta.DESCRIPTION : 'A default description';
+	- var canonical   = (typeof meta.CANONICAL   !== "undefined") ? meta.CANONICAL   : false;
+
+	title #{title}
+	meta(charset="utf-8")
+	meta(name="description", content="#{description}")
+	- if (canonical)
+  		link(rel="canonical", href="#{canonical}")
 
 ##Options
 
