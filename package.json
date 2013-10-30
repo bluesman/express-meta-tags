@@ -1,0 +1,17 @@
+{
+  "name": "node-meta",
+  "description": "ExpressJS Middleware uses redis to store/manage meta data for site pages",
+  "version": "0.0.1",
+  "dependencies": {
+    "redis":"0.7.x",
+    "csv":"0.3.x",
+    "optimist":"0.6.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bluesman/node-meta.git"
+  },
+  "engine": {
+    "node": ">=0.8.6"
+  }
+}
