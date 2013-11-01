@@ -49,7 +49,6 @@ function readCsv(path, cb) {
 	parseCsv(s);
 }
 
-
 function parseCsv(stream) {
 	csv()
 		.from.stream(stream, {
@@ -58,25 +57,29 @@ function parseCsv(stream) {
 		})
 		.to.array(function(data) {
 			/* TODO: support a header row */
-			for (var i = 0; i < data.length; i++) {
-				var row = data[i];
+			async.eachSeries(data, function(row, next) {
+					var metaData = {};
 
-				async.eachSeries(Object.keys(row), function(k, cb) {
-						metaData = {};
-						var u = k.toUpperCase();
-						metaData[u] = row[k];
-						client.hmset(argv.a + ':' + metaData['URL'], metaData, function(err, result) {
-							cb(err);
+					async.eachSeries(Object.keys(row), function(k, cb) {
+
+							var u = k.toUpperCase();
+							metaData[u] = row[k];
+							cb();
+						},
+
+						function(err, result) {
+							if (err) {
+								console.log(err);
+							} else {
+								client.hmset(argv.a + ':' + metaData['URL'], metaData, function(err, result) {
+									next();
+								});
+							}
 						});
-					},
-					function(err, result) {
-						if (err) {
-							console.log(err);
-						} else {
-							console.log('done.');
-						}
-						process.exit(0);
-					});
-			};
+				},
+				function(err, result) {
+					console.log('done.');
+					process.exit(0);
+				});
 		});
 }
