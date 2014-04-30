@@ -59,9 +59,9 @@ OR
 
 ##Use your meta tag data in your template
 
-	- var title       = (typeof meta.TITLE       !== "undefined") ? meta.TITLE       : 'A default title';
-	- var description = (typeof meta.DESCRIPTION !== "undefined") ? meta.DESCRIPTION : 'A default description';
-	- var canonical   = (typeof meta.CANONICAL   !== "undefined") ? meta.CANONICAL   : false;
+	- var title       = (typeof meta !== "undefined") ? meta.TITLE       : 'A default title';
+	- var description = (typeof meta !== "undefined") ? meta.DESCRIPTION : 'A default description';
+	- var canonical   = (typeof meta !== "undefined") ? meta.CANONICAL   : false;
 
 	title #{title}
 	meta(charset="utf-8")
